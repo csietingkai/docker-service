@@ -13,6 +13,17 @@ services:
       - ${MYSQL_DATA_DIR}:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  mariadb:
+    image: ${MARIADB_SERVICE}:${MARIADB_VERSION}
+    container_name: ${MARIADB_SERVICE}
+    restart: always
+    ports:
+      - ${MARIADB_PORT}:${MARIADB_INTERNAL_PORT}
+    volumes:
+      - ${MARIADB_CONFIG}:/etc/mysql/conf.d/my.conf
+      - ${MARIADB_DATA_DIR}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
   # postgres:
   #   image: postgres:${POSTGRES_VERSION}
   #   container_name: ${POSTGRES_SERVICE}
