@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  mysql:
+    image: ${MYSQL_SERVICE}:${MYSQL_VERSION}
+    container_name: ${MYSQL_SERVICE}
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_INTERNAL_PORT}
+    volumes:
+      - ${MYSQL_CONFIG}:/etc/mysql/conf.d/my.conf
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  # postgres:
+  #   image: postgres:${POSTGRES_VERSION}
+  #   container_name: ${POSTGRES_SERVICE}
+  #   restart: always
+  #   ports:
+  #     - ${POSTGRES_PORT}:${POSTGRES_INTERNEL_PORT}
+  #   volumes:
+  #     - ${POSTGRES_DIR}:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+  # redis:
+  #   image: redis:${REDIS_VERSION}
+  #   container_name: ${REDIS_SERVICE}
+  #   restart: always
+  #   command: --requirepass ${REDIS_ROOT_PASSWORD}
+  #   ports:
+  #     - ${REDIS_PORT}:${REDIS_INTERNEL_PORT}
+  #   volumes:
+  #     - ${REDIS_DIR}:/data
+  # mongo:
+  #   image: mongo:${MONGO_VERSION}
+  #   container_name: ${MONGO_SERVICE}
+  #   restart: always
+  #   ports:
+  #     - ${MONGO_PORT}:${MONGO_INTERNEL_PORT}
+  #   volumes:
+  #     - ${MONGO_DIR}:/data/db
+  #     - ${MONGO_CONFIG}:/etc/mongod.conf
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+  #     - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
