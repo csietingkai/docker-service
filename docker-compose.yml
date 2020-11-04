@@ -25,6 +25,15 @@ services:
       - ${MARIADB_DATA_DIR}:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+  mssql:
+    image: mcr.microsoft.com/mssql/server:${MSSQL_VERSION}
+    container_name: ${MSSQL_SERVICE}
+    restart: always
+    ports:
+      - ${MSSQL_PORT}:${MSSQL_INTERNEL_PORT}
+    environment:
+      ACCEPT_EULA: ${MSSQL_ACCEPT_EULA}
+      SA_PASSWORD: ${MSSQL_SA_PASSWORD}
   postgres:
     image: ${POSTGRES_SERVICE}:${POSTGRES_VERSION}
     container_name: ${POSTGRES_SERVICE}
