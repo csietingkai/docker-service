@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+  # Databases
   mysql:
     image: ${MYSQL_SERVICE}:${MYSQL_VERSION}
     container_name: ${MYSQL_SERVICE}
@@ -24,16 +25,28 @@ services:
       - ${MARIADB_DATA_DIR}:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-  # postgres:
-  #   image: postgres:${POSTGRES_VERSION}
-  #   container_name: ${POSTGRES_SERVICE}
-  #   restart: always
-  #   ports:
-  #     - ${POSTGRES_PORT}:${POSTGRES_INTERNEL_PORT}
-  #   volumes:
-  #     - ${POSTGRES_DIR}:/var/lib/postgresql/data
-  #   environment:
-  #     POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+  postgres:
+    image: ${POSTGRES_SERVICE}:${POSTGRES_VERSION}
+    container_name: ${POSTGRES_SERVICE}
+    restart: always
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_INTERNEL_PORT}
+    volumes:
+      - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+  mongo:
+    image: mongo:${MONGO_VERSION}
+    container_name: ${MONGO_SERVICE}
+    restart: always
+    ports:
+      - ${MONGO_PORT}:${MONGO_INTERNEL_PORT}
+    volumes:
+      - ${MONGO_DATA_DIR}:/data/db
+      - ${MONGO_CONFIG}:/etc/mongod.conf
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
   # redis:
   #   image: redis:${REDIS_VERSION}
   #   container_name: ${REDIS_SERVICE}
@@ -43,15 +56,17 @@ services:
   #     - ${REDIS_PORT}:${REDIS_INTERNEL_PORT}
   #   volumes:
   #     - ${REDIS_DIR}:/data
-  # mongo:
-  #   image: mongo:${MONGO_VERSION}
-  #   container_name: ${MONGO_SERVICE}
-  #   restart: always
-  #   ports:
-  #     - ${MONGO_PORT}:${MONGO_INTERNEL_PORT}
-  #   volumes:
-  #     - ${MONGO_DIR}:/data/db
-  #     - ${MONGO_CONFIG}:/etc/mongod.conf
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
-  #     - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+  #
+  # Programming Language Base
+  # node:
+  # python:
+  # openjdk
+  # Web Container
+  # nginx:
+  # tomcat:
+  # wordpress
+  # Other Tools
+  # registry:
+  # sonarqube
+  # jenkins
+  # redmine
