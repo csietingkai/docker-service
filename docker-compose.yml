@@ -1,5 +1,7 @@
 version: "3"
 
+# port for this project used: 1024 ~ 1099
+
 services:
   # Databases
   mysql:
@@ -67,7 +69,9 @@ services:
       - ${REDIS_DATA_DIR}:/data
 
   # Programming Language Base
-  # node:
+  node:
+    image: ${NODE_SERVICE}:${NODE_VERSION}
+    container_name: ${NODE_SERVICE}
   # python:
   # openjdk
   # Web Container
