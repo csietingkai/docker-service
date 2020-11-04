@@ -56,16 +56,16 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
-  # redis:
-  #   image: redis:${REDIS_VERSION}
-  #   container_name: ${REDIS_SERVICE}
-  #   restart: always
-  #   command: --requirepass ${REDIS_ROOT_PASSWORD}
-  #   ports:
-  #     - ${REDIS_PORT}:${REDIS_INTERNEL_PORT}
-  #   volumes:
-  #     - ${REDIS_DIR}:/data
-  #
+  redis:
+    image: ${REDIS_SERVICE}:${REDIS_VERSION}
+    container_name: ${REDIS_SERVICE}
+    restart: always
+    command: --requirepass ${REDIS_ROOT_PASSWORD}
+    ports:
+      - ${REDIS_PORT}:${REDIS_INTERNEL_PORT}
+    volumes:
+      - ${REDIS_DATA_DIR}:/data
+
   # Programming Language Base
   # node:
   # python:

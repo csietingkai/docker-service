@@ -2,3 +2,4 @@ mysql/data/
 mariadb/data/
 postgres/data/
 mongo/data/
+redis/data/
