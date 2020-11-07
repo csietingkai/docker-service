@@ -95,13 +95,12 @@ services:
     restart: always
     ports:
       - ${TOMCAT_PORT}:${TOMCAT_INTERNAL_PORT}
-    # volumes:
-    #   - ${TOMCAT_WEBAPPS_DIR}:/usr/local/tomcat/webapps
-    #   - ${TOMCAT_CONFIG_DIR}:/usr/local/tomcat/conf
+    volumes:
+      - ${TOMCAT_WEBAPPS_DIR}:/usr/local/tomcat/webapps
+      - ${TOMCAT_CONFIG_DIR}:/usr/local/tomcat/conf
 
   # Other Tools
   gitlab:
-    image: docker pull store/gitlab/gitlab-ce:11.10.4-ce.0
     image: store/gitlab/gitlab-ce:${GITLAB_VERSION}
     container_name: ${GITLAB_SERVICE}
     restart: always
@@ -113,7 +112,14 @@ services:
     #   - ${GITLAB_DATA_DIR}:/var/opt/gitlab
     #   - ${GITLAB_CONFIG_DIR}:/etc/gitlab
     #   - ${GITLAB_LOG_DIR}:/var/log/gitlab
-  # registry:
+  registry:
+    image: ${REGISTRY_SERVICE}:${REGISTRY_VERSION}
+    container_name: ${REGISTRY_SERVICE}
+    restart: always
+    ports:
+      - ${REGISTRY_PORT}:${REGISTRY_INTERNAL_PORT}
+    volumes:
+      - ${REGISTRY_DATA_DIR}:/var/lib/registry
   # sonarqube
   # jenkins
   # redmine
