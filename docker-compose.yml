@@ -72,8 +72,12 @@ services:
   node:
     image: ${NODE_SERVICE}:${NODE_VERSION}
     container_name: ${NODE_SERVICE}
-  # python:
-  # openjdk
+  python:
+    image: ${PYTHON_SERVICE}:${PYTHON_VERSION}
+    container_name: ${PYTHON_SERVICE}
+  openjdk:
+    image: ${OPENJDK_SERVICE}:${OPENJDK_VERSION}
+    container_name: ${OPENJDK_SERVICE}
   # Web Container
   # nginx:
   # tomcat:
