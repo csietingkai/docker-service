@@ -95,11 +95,24 @@ services:
     restart: always
     ports:
       - ${TOMCAT_PORT}:${TOMCAT_INTERNAL_PORT}
-    volumes:
-      - ${TOMCAT_WEBAPPS_DIR}:/usr/local/tomcat/webapps
-      - ${TOMCAT_CONFIG_DIR}:/usr/local/tomcat/conf
-  # wordpress
+    # volumes:
+    #   - ${TOMCAT_WEBAPPS_DIR}:/usr/local/tomcat/webapps
+    #   - ${TOMCAT_CONFIG_DIR}:/usr/local/tomcat/conf
+
   # Other Tools
+  gitlab:
+    image: docker pull store/gitlab/gitlab-ce:11.10.4-ce.0
+    image: store/gitlab/gitlab-ce:${GITLAB_VERSION}
+    container_name: ${GITLAB_SERVICE}
+    restart: always
+    ports:
+      - ${GITLAB_PORT1}:${GITLAB_INTERNAL_PORT1}
+      # - ${GITLAB_PORT2}:${GITLAB_INTERNAL_PORT2}
+      # - ${GITLAB_PORT3}:${GITLAB_INTERNAL_PORT3}
+    # volumes:
+    #   - ${GITLAB_DATA_DIR}:/var/opt/gitlab
+    #   - ${GITLAB_CONFIG_DIR}:/etc/gitlab
+    #   - ${GITLAB_LOG_DIR}:/var/log/gitlab
   # registry:
   # sonarqube
   # jenkins
