@@ -78,8 +78,17 @@ services:
   openjdk:
     image: ${OPENJDK_SERVICE}:${OPENJDK_VERSION}
     container_name: ${OPENJDK_SERVICE}
+
   # Web Container
-  # nginx:
+  nginx:
+    image: ${NGINX_SERVICE}:${NGINX_VERSION}
+    container_name: ${NGINX_SERVICE}
+    restart: always
+    ports:
+      - ${NGINX_PORT}:${NGINX_INTERNAL_PORT}
+    # volumes:
+    #   - ${NGINX_DATA_DIR}:/usr/share/nginx/html
+    #   - ${NGINX_CONFIG_DIR}:/etc/nginx/conf.d/
   # tomcat:
   # wordpress
   # Other Tools
