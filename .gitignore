@@ -5,3 +5,6 @@ mongo/data/
 redis/data/
 nginx/data/
 tomcat/data/
+gitlab/data/
+gitlab/log/
+registry/data/
