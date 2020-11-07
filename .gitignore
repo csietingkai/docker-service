@@ -3,4 +3,5 @@ mariadb/data/
 postgres/data/
 mongo/data/
 redis/data/
-nginx/data
+nginx/data/
+tomcat/data/
