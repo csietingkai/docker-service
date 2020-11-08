@@ -126,5 +126,12 @@ services:
     restart: always
     ports:
       - ${SONARQUBE_PORT}:${SONARQUBE_INTERNAL_PORT}
-  # jenkins
+  jenkins:
+    image: jenkins/jenkins:${JENKINS_VERSION}
+    container_name: ${JENKINS_SERVICE}
+    restart: always
+    ports:
+      - ${JENKINS_PORT}:${JENKINS_INTERNAL_PORT}
+    # volumes:
+    #   - ${JENKINS_DIR}:/var/jenkins_home
   # redmine
