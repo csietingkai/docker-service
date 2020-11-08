@@ -131,7 +131,13 @@ services:
     container_name: ${JENKINS_SERVICE}
     restart: always
     ports:
-      - ${JENKINS_PORT}:${JENKINS_INTERNAL_PORT}
+      - ${JENKINS_PORT1}:${JENKINS_INTERNAL_PORT1}
+      # - ${JENKINS_PORT2}:${JENKINS_INTERNAL_PORT2}
     # volumes:
     #   - ${JENKINS_DIR}:/var/jenkins_home
-  # redmine
+  redmine:
+    image: ${REDMINE_SERVICE}:${REDMINE_VERSION}
+    container_name: ${REDMINE_SERVICE}
+    restart: always
+    ports:
+      - ${REDMINE_PORT}:${REDMINE_INTERNAL_PORT}
