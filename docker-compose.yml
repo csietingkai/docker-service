@@ -120,6 +120,11 @@ services:
       - ${REGISTRY_PORT}:${REGISTRY_INTERNAL_PORT}
     volumes:
       - ${REGISTRY_DATA_DIR}:/var/lib/registry
-  # sonarqube
+  sonarqube:
+    image: ${SONARQUBE_SERVICE}:${SONARQUBE_VERSION}
+    container_name: ${SONARQUBE_SERVICE}
+    restart: always
+    ports:
+      - ${SONARQUBE_PORT}:${SONARQUBE_INTERNAL_PORT}
   # jenkins
   # redmine
