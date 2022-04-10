@@ -11,10 +11,10 @@ import instaloader
 
 app = Flask(__name__)
 
-USERNAME = os.getenv('USERNAME')
-PASSWORD = os.getenv('PASSWORD')
-FILES_DIR = os.getenv('FILES_DIR')
-WAIT_TIME = int(os.getenv('WAIT_TIME', 3))
+USERNAME = os.getenv('INSTA_USERNAME')
+PASSWORD = os.getenv('INSTA_PASSWORD')
+FILES_DIR = os.getenv('INSTA_FILES_DIR')
+WAIT_TIME = int(os.getenv('INSTA_WAIT_TIME', 3))
 
 L = instaloader.Instaloader(download_video_thumbnails=False, save_metadata=False, compress_json=False, download_comments=False, post_metadata_txt_pattern='', max_connection_attempts=1, dirname_pattern=FILES_DIR + '/{target}')
 
