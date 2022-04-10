@@ -16,6 +16,12 @@ PASSWORD = os.getenv('PASSWORD')
 FILES_DIR = os.getenv('FILES_DIR', 'data')
 WAIT_TIME = int(os.getenv('WAIT_TIME', 3))
 
+print('envs')
+print('USERNAME: ', USERNAME)
+print('PASSWORD: ', PASSWORD)
+print('FILES_DIR: ', FILES_DIR)
+print('WAIT_TIME: ', WAIT_TIME)
+
 L = instaloader.Instaloader(download_video_thumbnails=False, save_metadata=False, compress_json=False, download_comments=False, post_metadata_txt_pattern='', max_connection_attempts=1, dirname_pattern=FILES_DIR + '/{target}')
 
 def updateTargetTime(target):
