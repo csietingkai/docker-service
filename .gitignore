@@ -9,3 +9,5 @@ gitlab/data/
 gitlab/log/
 registry/data/
 jenkins
+
+.history/

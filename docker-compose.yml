@@ -1,6 +1,6 @@
 version: "3"
 
-# port for this project used: 1024 ~ 1099
+# port for this project used: 1024 ~ 1050
 
 services:
   # Databases
@@ -141,3 +141,15 @@ services:
     restart: always
     ports:
       - ${REDMINE_PORT}:${REDMINE_INTERNAL_PORT}
+  instadownloader:
+    image: localhost:1035/tingkai/${INSTA_SERVICE}:${INSTA_VERSION}
+    container_name: ${INSTA_SERVICE}
+    restart: always
+    ports:
+      - ${INSTA_PORT}:${INSTA_INTERNAL_PORT}
+    volumes:
+      - ${INSTA_FILES}:/app/data
+    environment:
+      - USERNAME=${INSTA_USERNAME}
+      - PASSWORD=${INSTA_PASSWORD}
+      - WAIT_TIME=${INSTA_WAIT_TIME}
