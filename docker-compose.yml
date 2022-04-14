@@ -144,7 +144,6 @@ services:
   instadownloader:
     image: localhost:1035/tingkai/${INSTA_SERVICE}:${INSTA_VERSION}
     container_name: ${INSTA_SERVICE}
-    restart: always
     ports:
       - ${INSTA_PORT}:${INSTA_INTERNAL_PORT}
     volumes:
