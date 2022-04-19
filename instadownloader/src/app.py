@@ -24,22 +24,6 @@ print('WAIT_TIME: ', WAIT_TIME)
 
 L = instaloader.Instaloader(download_video_thumbnails=False, save_metadata=False, compress_json=False, download_comments=False, post_metadata_txt_pattern='', max_connection_attempts=1, dirname_pattern=FILES_DIR + '/{target}')
 
-def updateTargetTime(target):
-    filename = FILES_DIR + '/followee.json'
-    data = {}
-    if os.path.isfile(filename):
-        file = open(filename, 'r')
-        data = json.load(file)
-        file.close()
-    else:
-        file = open(filename, 'x')
-        file.close()
-    data[target] = calendar.timegm(time.gmtime())
-
-    file = open(filename, 'w')
-    file.write(json.dumps(data))
-    file.close()
-
 @app.route('/login')
 def login():
     try:
@@ -69,18 +53,15 @@ def download():
         earliestDate += dt.timedelta(days = 1)
         latestDateStr = fileList[-1].split('/')[-1]
         latestDate = datetime(int(latestDateStr[0:4]), int(latestDateStr[5:7]), int(latestDateStr[8:10]))
-    try:
-        profile = instaloader.Profile.from_username(L.context, target)
-        posts = instaloader.Profile.get_posts(profile)
-        for post in posts:
-            if (earliestDate and (post.date_utc < earliestDate)) or (latestDate and (post.date_utc > latestDate)) or ((not earliestDate) and (not latestDate)):
-                L.download_post(post, target)
-                time.sleep(3)
-        updateTargetTime(target)
-        return 'SUCCESS'
-    except Exception as e:
-        print(str(e))
-        return str(e)
+    if earliestDate and latestDate:
+        print('[INFO] date range from ' + str(earliestDate) + ' to ' + str(latestDate))
+    profile = instaloader.Profile.from_username(L.context, target)
+    posts = instaloader.Profile.get_posts(profile)
+    for post in posts:
+        if (earliestDate and (post.date_utc < earliestDate)) or (latestDate and (post.date_utc > latestDate)) or ((not earliestDate) and (not latestDate)):
+            L.download_post(post, target)
+            time.sleep(WAIT_TIME)
+    return 'SUCCESS'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
