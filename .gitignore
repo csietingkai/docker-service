@@ -8,6 +8,7 @@ tomcat/data/
 gitlab/data/
 gitlab/log/
 registry/data/
-jenkins
+jenkins/
+minecraft/
 
 .history/

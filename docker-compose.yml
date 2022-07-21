@@ -152,3 +152,30 @@ services:
       - USERNAME=${INSTA_USERNAME}
       - PASSWORD=${INSTA_PASSWORD}
       - WAIT_TIME=${INSTA_WAIT_TIME}
+  minecraft-server:
+    image: itzg/${MINECRAFT_SERVICE}:${MINECRAFT_SERVICE_VERSION}
+    container_name: ${MINECRAFT_SERVICE}
+    ports:
+      - ${MINECRAFT_SERVICE_PORT}:${MINECRAFT_SERVICE_VERSION_INTERNAL_PORT}
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - ${MINECRAFT_SERVICE_DATA_DIR}:/data
+    environment:
+      - EULA=TRUE
+      - VERSION=${MINECRAFT_GAME_VERSION}
+      - MEMORY=4G
+  forge-server:
+    image: itzg/${MINECRAFT_SERVICE}:${MINECRAFT_SERVICE_VERSION}
+    container_name: ${FORGE_SERVICE}
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - ${FORGE_SERVICE_DATA_DIR}:/data
+    environment:
+      - EULA=TRUE
+      - VERSION=${FORGE_GAME_VERSION}
+      - MEMORY=8G
+      - TYPE=FORGE
