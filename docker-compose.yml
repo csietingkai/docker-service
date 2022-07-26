@@ -169,6 +169,8 @@ services:
   forge-server:
     image: itzg/${MINECRAFT_SERVICE}:${MINECRAFT_SERVICE_VERSION}
     container_name: ${FORGE_SERVICE}
+    ports:
+      - ${FORGE_SERVICE_PORT}:${MINECRAFT_SERVICE_VERSION_INTERNAL_PORT}
     tty: true
     stdin_open: true
     restart: unless-stopped
@@ -179,3 +181,18 @@ services:
       - VERSION=${FORGE_GAME_VERSION}
       - MEMORY=8G
       - TYPE=FORGE
+  bukkit-server:
+    image: itzg/${MINECRAFT_SERVICE}:${MINECRAFT_SERVICE_VERSION}
+    container_name: ${BUKKIT_SERVICE}
+    ports:
+      - ${BUKKIT_SERVICE_PORT}:${MINECRAFT_SERVICE_VERSION_INTERNAL_PORT}
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - ${BUKKIT_SERVICE_DATA_DIR}:/data
+    environment:
+      - EULA=TRUE
+      - VERSION=${BUKKIT_GAME_VERSION}
+      - MEMORY=8G
+      - TYPE=BUKKIT
