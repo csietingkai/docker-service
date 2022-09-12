@@ -1,6 +1,7 @@
 mysql/data/
 mariadb/data/
 postgres/data/
+postgres/backup/
 mongo/data/
 redis/data/
 nginx/data/

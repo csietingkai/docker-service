@@ -44,6 +44,7 @@ services:
       - ${POSTGRES_PORT}:${POSTGRES_INTERNEL_PORT}
     volumes:
       - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
+      - ${POSTGRES_BACKUP_DIR}:/backup
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
   mongo:
